@@ -1,0 +1,85 @@
+html {
+    box-sizing: border-box;
+}
+
+body,
+#canvas-column,
+#canvas-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+#canvas-column {
+  margin: 0;
+  padding: 0 !important;
+}
+
+canvas {
+  background-color: #2521214b;
+}
+
+#tricount {
+  position: absolute;
+  left: 20px;
+}
+
+#texture-size {
+  position: absolute;
+  top: 1.5em;
+  left: 20px;
+}
+
+#canvas-column {
+  width: calc(100% - 475px);
+}
+
+.segment {
+  background-color: white
+}
+
+.menu > a.item,
+.menu > a.item.active {
+  color: black !important;
+}
+
+#heightmap {
+  display: none;
+}
+
+#controls-column {
+  background-color: darkslategray;
+  overflow: scroll;
+}
+
+#controls {
+  display: inline-table;
+}
+
+.ui.row {
+  margin-bottom: 0.5em;
+}
+
+#lightcontrol {
+	width:  12em;
+	height: 12em;
+	background-color: rgb(58, 3, 80);
+	outline: 1px solid white;
+	outline-offset: -1px;
+}
+
+#lightcontrol-label {
+	top: 0.2em;
+	left: 0.2em;
+	pointer-events: none;
+}
+
+.tabular.menu {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.tabular.menu > .item,
+.tabular.menu > .item.active,
+.ui.inverted.vertical.menu .item .menu .active.item {
+  color: black !important;
+}
