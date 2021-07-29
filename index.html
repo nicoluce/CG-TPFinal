@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="assets/semantic.min.css">
+  <script src="assets/jquery.min.js"></script>
+  <script src="assets/semantic.min.js"></script>
+</head>
+<body>
+  <div class="ui visible right very wide sidebar inverted vertical menu">
+    <div class="ui item">
+      <canvas id="lightcontrol"></canvas>
+      <div id="lightcontrol-label">Dirección de la Luz</div>
+    </div>
+    <div class="ui segments">
+      <div class="ui item">
+        <div id="controls" class="column">
+          <select id="geometry-select">
+            <option>Icosahedro</option>
+            <option>Esfera</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="canvas-column">
+    <label id="tricount"></label>
+    <div id="canvas-container">
+      <canvas id="canvas"></canvas>
+    </div>
+  </div>
+</body>
+</html>
