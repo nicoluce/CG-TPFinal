@@ -1,3 +1,5 @@
+// Basado en TP5/lightView.js 
+
 import { InitShaderProgram, MatrixMult, GetModelViewMatrix, ProjectionMatrix } from './utils';
 
 export default class LightView {

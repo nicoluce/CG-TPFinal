@@ -1,4 +1,4 @@
-import { SimplexNoise } from './perlin';
+import { SimplexNoise } from 'simplex-noise';
 import { CheckboxControl, SliderControl, TabControls } from './Controls';
 
 const s = new SimplexNoise(Math.random);

@@ -26,7 +26,6 @@ export default class PlanetDrawer extends Drawer {
     const detail = localStorage.getItem('detail') || 3;
     super(new IcosahedronGeometry(radius, detail), planetVS, planetFS);
 
-    this.scaleUniform = gl.getUniformLocation(this.prog, 'u_scale');
 		this.lightDirUniform = gl.getUniformLocation(this.prog, 'u_lightDir');
     this.lightColorUniform = gl.getUniformLocation(this.prog, 'u_lightColor');
     this.lightSizeUniform = gl.getUniformLocation(this.prog, 'u_lightSize');
@@ -90,7 +89,6 @@ export default class PlanetDrawer extends Drawer {
   }
 
   customDraw() {
-    gl.uniform1f(this.scaleUniform, this.scale);
 		gl.uniform3fv(this.lightDirUniform, this.lightDir);
 		gl.uniform3fv(this.lightColorUniform, this.lightColor);
 		gl.uniform1f(this.lightSizeUniform, this.lightSize);
@@ -128,23 +126,6 @@ export default class PlanetDrawer extends Drawer {
     }
   };
 
-  setTexture(img) {
-		addGroupControl('Texture');
-
-    addControl('Texture', 'scale', { step: "0.001", min: "0.001", max: "10.0", value: "1.0" },
-      (v) => {
-        this.scale = Number(v);
-      });
-    
-    addControl('Texture', 'blend', { step: "0.001", min: "0.001", max: "2.0", value: "1.0" },
-      (v) => {
-        this.blendSharpness = Number(v);
-      });
-    document.getElementById("texture-container").classList.add("loading");
-    super.setTexture('heightmap', img);
-    document.getElementById("texture-container").classList.remove("loading");
-  }
-
   setLightDir( x, y, z ) {
 		this.lightDir = [x, y, z];
   }
@@ -156,34 +137,23 @@ const planetVS = `
   attribute vec3 a_pos;
   attribute vec3 a_norm;
   attribute vec3 a_color;
-  attribute vec2 a_tex;
 
   uniform mat4 u_mvp;
   uniform mat4 u_mv;
   uniform mat3 u_norm;
 
-  uniform sampler2D u_heightmap;
-  uniform sampler2D u_colormap;
-  uniform float u_scale;
-  uniform float u_blendSharpness;
 	uniform vec3 u_lightDir;
 	uniform float u_lightSize;
 
   varying vec3 v_color;
   varying vec3 v_norm;
-  varying vec3 v_pos;
   
-  varying vec4 v_noise;
-  varying vec2 v_tex;
-
 	varying vec3 v_V;
 	varying vec3 v_lightDir;
 
   void main() {
     v_color = a_color;
     v_norm = u_norm * a_norm;
-    v_pos = a_pos;
-    v_tex = a_tex;
 		v_V = vec3(-u_mvp * vec4(a_pos, 1));
     v_lightDir = (u_lightDir * u_lightSize) - a_pos;
 
@@ -194,16 +164,11 @@ const planetVS = `
 const planetFS = `
   precision highp float;
 
-  uniform sampler2D u_colormap;
-  uniform float u_scale;
 	uniform vec3 u_lightColor;
 	uniform float u_shine;
 
-  varying vec3 v_pos;
   varying vec3 v_color;
   varying vec3 v_norm;
-  varying vec2 v_tex;
-  varying vec4 v_noise;
 	
   varying vec3 v_V;
 	varying vec3 v_lightDir;

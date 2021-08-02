@@ -13,7 +13,6 @@ window.onload = function () {
 	
 	app.AddDrawer(new SpaceDrawer());
 	app.AddDrawer(new PlanetDrawer());
-	// app.AddDrawer(new OceanDrawer());
 
 	app.DrawScene();
 };

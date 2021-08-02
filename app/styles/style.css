@@ -23,12 +23,6 @@ canvas {
   left: 20px;
 }
 
-#texture-size {
-  position: absolute;
-  top: 1.5em;
-  left: 20px;
-}
-
 #canvas-column {
   width: calc(100% - 475px);
 }

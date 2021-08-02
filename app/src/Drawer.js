@@ -19,38 +19,6 @@ export default class Drawer {
 
     this.colorsAttrib = gl.getAttribLocation(this.prog, 'a_color');
     this.colorsBuffer = gl.createBuffer();
-
-    this.textures = [];
-  }
-
-  addTexture(name, unit, img) {
-    const newTexture = gl.createTexture();
-    this.textures.push({
-      sampler: gl.getUniformLocation(this.prog, `u_${name}`),
-      buffer: gl.createBuffer(),
-      texture: newTexture,
-      unit: unit
-    });
-
-    gl.bindTexture(gl.TEXTURE_2D, newTexture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-    gl.generateMipmap(gl.TEXTURE_2D);
-    
-    switch (unit) {
-      case 0:
-        gl.activeTexture(gl.TEXTURE0);
-        break;
-      case 1:
-        gl.activeTexture(gl.TEXTURE1);
-        break;
-      case 2:
-        gl.activeTexture(gl.TEXTURE2);
-        break;
-      case 3:
-        gl.activeTexture(gl.TEXTURE3);
-        break;
-    }
-    gl.bindTexture(gl.TEXTURE_2D, newTexture);
   }
 
   draw(matrixMVP, matrixMV, matrixNormal) {
@@ -86,8 +54,6 @@ export default class Drawer {
       gl.vertexAttribPointer(this.colorsAttrib, 3, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(this.colorsAttrib);
     }
-
-    this.textures.forEach(({ sampler, unit }) => gl.uniform1i(sampler, unit));
     
     gl.drawElements(gl.TRIANGLES, this.geom.indices.length, gl.UNSIGNED_SHORT, 0);
     

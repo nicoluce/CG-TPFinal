@@ -1,3 +1,5 @@
+// Basado en https://github.com/mrdoob/three.js/blob/master/src/geometries/SphereGeometry.js
+
 import { normalize } from "./utils";
 import { Controls, SliderControl } from './Controls'
 
