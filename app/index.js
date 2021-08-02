@@ -1,6 +1,5 @@
 import App from './src/App';
 import PlanetDrawer from './src/PlanetDrawer';
-import OceanDrawer from './src/OceanDrawer';
 
 // Load application styles
 import './styles/style.css';

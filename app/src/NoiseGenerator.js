@@ -1,4 +1,4 @@
-import { SimplexNoise } from 'simplex-noise';
+import SimplexNoise from 'simplex-noise';
 import { CheckboxControl, SliderControl, TabControls } from './Controls';
 
 const s = new SimplexNoise(Math.random);
@@ -91,16 +91,6 @@ class NoiseLayer {
   }
 
   updateLocalStorage() {
-    console.log(`noise-layer-${this.id}`, JSON.stringify({
-      scale: this.scale,
-      octaves: this.octaves,
-      persistance: this.persistance,
-      roughness: this.roughness,
-      minValue: this.minValue,
-      strength: this.strength,
-      view: this.view,
-      useFirstAsMask: this.useFirstAsMask
-    }))
     localStorage.setItem(`noise-layer-${this.id}`, JSON.stringify({
       scale: this.scale,
       octaves: this.octaves,
