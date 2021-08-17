@@ -67,7 +67,7 @@ export default class PlanetDrawer extends Drawer {
           this.gradient = gradient;
           this.generateHeightMap();
         }
-        })
+      })
     );
 
     this.generateHeightMap();
@@ -83,8 +83,8 @@ export default class PlanetDrawer extends Drawer {
       default:
         this.geom = new IcosahedronGeometry(this.size, this.detail);
         break;
-
     }
+    this.geom.addControls('Planet Geometry');
     this.generateHeightMap();
   }
 

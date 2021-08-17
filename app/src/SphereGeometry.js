@@ -14,8 +14,9 @@ export default class SphereGeometry {
 		this.thetaLength = thetaLength;
 
 		this.generateGeometry();
-
-    this.geometryControls = new Controls('Geometry');
+	}
+	addControls(name = 'Geometry') {
+    this.geometryControls = new Controls(name);
 		this.geometryControls.addControl(new SliderControl('radius', { step: "0.01", min: "0.01", max: "1.0", value: this.radius },
 			(v) => {
 				this.radius = Number(v);
