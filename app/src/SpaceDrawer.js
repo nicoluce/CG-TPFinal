@@ -80,13 +80,7 @@ const spaceFS = `
   }
 
   void main() {
-    mat2 m = mat2(u_mvp[0][0], u_mvp[1][0], u_mvp[0][1], u_mvp[1][1]);
-    vec2 p = (m * gl_FragCoord.xy) / (-u_mvp[3][3]);
-
-    // Use the noise function
-    float r = floor(noise(p) * 500.0);
-    // float n = r * (255.0 * log(1.0 - noise(p / 25.0)) * -0.125);
-
-    gl_FragColor = vec4(vec3(1.0-r), 1.0);
+    float n = floor(noise(gl_FragCoord.xy / 20.0) * 500.0);
+    gl_FragColor = vec4(vec3(1.0-n), 1.0);
   }
 `;
