@@ -14,6 +14,7 @@ export default class App {
     window.onresize = this.WindowResize();
     window.addEventListener('draw', (e) => this.DrawScene());
     document.getElementById('geometry-select').onchange = (e) => this.OnGeometryChange(e);
+    document.getElementById('auto-rotate').onchange = (e) => this.AutoRotate(e.target);
 
     this.InitWebGL();
 
@@ -137,5 +138,26 @@ export default class App {
   AddDrawer(drawer) {
     drawer.setLightDir && drawer.setLightDir(...this.lightDir);
     this.drawers.push(drawer);
+  }
+
+  // Control de la calesita de rotación
+  AutoRotate(param) {
+    // Si hay que girar...
+    if (param.checked) {
+      // Vamos rotando una cantiad constante cada 30 ms
+      this.timer = setInterval(
+        () => {
+          var v = 50;
+          this.autorot += 0.0005 * v;
+          if ( this.autorot > 2*Math.PI ) this.autorot -= 2*Math.PI;
+
+          // Reenderizamos
+          this.DrawScene();
+        },
+        30
+      );
+    } else {
+      clearInterval(this.timer);
+    }
   }
 }
