@@ -1,9 +1,14 @@
-import SimplexNoise from 'simplex-noise';
+import tooloud from 'tooloud';
+
 import { CheckboxControl, SliderControl, TabControls } from './Controls';
 
-const s = new SimplexNoise(Math.random);
-function noise3D(x, y, z) {
-  return s.noise3D(x, y, z);
+const { Perlin, Simplex } = tooloud;
+const seed = Math.random();
+Simplex.setSeed(seed)
+Perlin.setSeed(seed);
+
+function noise3D(x, y, z, Noise=Perlin) {
+  return Noise.noise(x, y, z);
 }
 
 export class NoiseHandler {
@@ -169,12 +174,9 @@ class NoiseLayer {
     let amplitud = 1;
     let frequency = 0.71
     let noiseHeight = 0;
-    let weight = 1;
     for (let i = 0; i < this.octaves; i++) {
       let noiseValue = noise3D(x * frequency/ this.scale, y * frequency/ this.scale, z * frequency/ this.scale);
-      noiseValue *= weight;
-      weight = noiseValue;
-
+      
       noiseHeight += (noiseValue + 1) * 0.5 * amplitud;
 
       amplitud *= this.persistance;
