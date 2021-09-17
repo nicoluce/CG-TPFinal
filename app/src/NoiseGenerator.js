@@ -20,7 +20,7 @@ export class NoiseHandler {
   addControls(name) {
     this.name = name;
     const oldLayers = JSON.parse(localStorage.getItem(this.name));
-    if (oldLayers.length) {
+    if (oldLayers && oldLayers.length) {
       oldLayers.forEach((id) => this.addNoiseLayer(id));
     }
 
